@@ -1,0 +1,14 @@
+Package: cloudstorageR
+Title: An interface to Google Cloud Storage in R.
+Version: 0.0.0.9000
+Authors@R: person("Jarod G.R.", "Meng", email = "genrong.meng@gmail.com", role = c("aut", "cre"))
+Description: An interface to Google Cloud Storage in R.
+Depends:
+    R (>= 3.1.0)
+Imports: 
+    httr,
+    jsonlite,
+    assertthat
+License: MIT
+Encoding: UTF-8
+LazyData: true
