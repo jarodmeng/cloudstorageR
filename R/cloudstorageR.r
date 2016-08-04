@@ -1,6 +1,6 @@
 #' An R package to interact with Google Cloud Storage.
 #' @name cloudstorageR
 #' @docType package
-#' @import httr
+#' @importFrom httr POST config add_headers
 #' @import assertthat
 NULL

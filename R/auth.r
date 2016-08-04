@@ -1,7 +1,3 @@
-cloudstorageR <- oauth_app("google",
-                           "1071675102318-1n3sp80hmicrgnf82op59bjv37a57gik.apps.googleusercontent.com",
-                           "cZbmW_BK-CbUqQCytSYAzpwx")
-
 cs_env <- new.env(parent = emptyenv())
 
 #' Get and set access credentials
@@ -11,6 +7,7 @@ cs_env <- new.env(parent = emptyenv())
 #' \url{https://console.cloud.google.com/}
 #'
 #' @keywords internal
+#' @importFrom httr oauth_app oauth2.0_token oauth_endpoints
 #' @export
 #' @param value new access credentials, as returned by
 #'  \code{\link[httr]{oauth2.0_token}}
@@ -19,6 +16,9 @@ cs_env <- new.env(parent = emptyenv())
 #' @seealso Cloud Storage OAuth documentation:
 #'  \url{https://cloud.google.com/storage/docs/json_api/v1/how-tos/authorizing}
 get_access_cred <- function() {
+  cloudstorageR <- oauth_app("google",
+                             "1071675102318-1n3sp80hmicrgnf82op59bjv37a57gik.apps.googleusercontent.com",
+                             "cZbmW_BK-CbUqQCytSYAzpwx")
   cred <- cs_env$access_cred
   if (is.null(cred)) {
     cred <- oauth2.0_token(oauth_endpoints("google"), cloudstorageR,
