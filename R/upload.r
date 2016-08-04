@@ -7,8 +7,9 @@ upload_url <- "https://www.googleapis.com/upload/storage/v1/"
 #' @param type Media type
 #' @return uploaded object's self link
 #' @importFrom mime guess_type
+#' @importFrom httr upload_file
 #' @export
-upload_file <- function(file, bucket, name = "uploadedObject", type = NULL,
+upload_file_to_cs <- function(file, bucket, name = "uploadedObject", type = NULL,
                         token = get_access_cred()) {
   assert_that(is.string(file),
               is.string(bucket),
@@ -49,5 +50,5 @@ upload_df_as_csv <- function(df, bucket, name = deparse(substitute(df)),
   # NA values are encoded as empty strings
   write.csv(df, tmp, row.names = FALSE, na = "")
   # upload the csv to bucket in cloud storage
-  upload_file(tmp, bucket, name)
+  upload_file_to_cs(tmp, bucket, name)
 }
