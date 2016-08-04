@@ -1,6 +1,6 @@
 upload_url <- "https://www.googleapis.com/upload/storage/v1/"
 
-#' Upload a file to a Cloud Storage bucket
+#' Upload a file to Cloud Storage
 #' @param file Name of the uploaded file
 #' @param bucket Bucket name
 #' @param name Object name
@@ -30,7 +30,7 @@ upload_file_to_cs <- function(file, bucket, name = "uploadedObject", type = NULL
   content(resp)$selfLink
 }
 
-#' Upload a data frame to a Cloud Storage bucket
+#' Upload a data frame as a CSV file to Cloud Storage
 #' @param df data frame name
 #' @param bucket bucket name
 #' @param name object name

@@ -2,7 +2,7 @@
 % Please edit documentation in R/upload.r
 \name{upload_file_to_cs}
 \alias{upload_file_to_cs}
-\title{Upload a file to a Cloud Storage bucket}
+\title{Upload a file to Cloud Storage}
 \usage{
 upload_file_to_cs(file, bucket, name = "uploadedObject", type = NULL,
   token = get_access_cred())
@@ -20,6 +20,6 @@ upload_file_to_cs(file, bucket, name = "uploadedObject", type = NULL,
 uploaded object's self link
 }
 \description{
-Upload a file to a Cloud Storage bucket
+Upload a file to Cloud Storage
 }
 

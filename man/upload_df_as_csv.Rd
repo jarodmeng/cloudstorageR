@@ -2,7 +2,7 @@
 % Please edit documentation in R/upload.r
 \name{upload_df_as_csv}
 \alias{upload_df_as_csv}
-\title{Upload a data frame to a Cloud Storage bucket}
+\title{Upload a data frame as a CSV file to Cloud Storage}
 \usage{
 upload_df_as_csv(df, bucket, name = deparse(substitute(df)),
   token = get_access_cred())
@@ -20,6 +20,6 @@ upload_df_as_csv(df, bucket, name = deparse(substitute(df)),
 uploaded object's self link
 }
 \description{
-Upload a data frame to a Cloud Storage bucket
+Upload a data frame as a CSV file to Cloud Storage
 }
 
