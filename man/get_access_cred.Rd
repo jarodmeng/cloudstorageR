@@ -4,17 +4,26 @@
 \alias{get_access_cred}
 \alias{reset_access_cred}
 \alias{set_access_cred}
+\alias{set_oauth2.0_cred}
+\alias{set_service_token}
 \title{Get and set access credentials}
 \usage{
 get_access_cred()
 
+set_oauth2.0_cred(app = bigqr)
+
 set_access_cred(value)
 
 reset_access_cred()
+
+set_service_token(service_token)
 }
 \arguments{
 \item{value}{new access credentials, as returned by
 \code{\link[httr]{oauth2.0_token}}}
+
+\item{service_token}{A JSON string, URL or file, giving or pointing to
+the service token file.}
 }
 \description{
 Get and set access credentials

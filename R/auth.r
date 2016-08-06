@@ -21,38 +21,23 @@ cs_env <- new.env(parent = emptyenv())
 #' @seealso Cloud Storage OAuth documentation:
 #'  \url{https://cloud.google.com/storage/docs/json_api/v1/how-tos/authorizing}
 get_access_cred <- function() {
-  cred <- cs_env$access_cred
-  
+  cred <- bq_env$access_cred
   if (is.null(cred)) {
-    scope <- c(
-      "https://www.googleapis.com/auth/cloud-platform",
-      "https://www.googleapis.com/auth/devstorage.full_control")
-    
-    use_service <- getOption("cloudstorageR.use.service.account")
-    
-    if (!is.null(use_service) && isTRUE(use_service)) {
-      json_key <- getOption("cloudstorageR.service.account.json")
-      if (is.null(json_key) || !is.string(json_key)) {
-        stop("You have to provide a valid JSON key file.")
-      } else {
-        secrets <- fromJSON(json_key)
-        cred <- oauth_service_token(google, secrets,
-                                    scope = paste(scope, collapse = " "))
-      }
-    } else {
-      app <- getOption("cloudstorageR.oauth.app")
-      if (is.null(app)) {
-        app <- cloudstorageR
-      }
-      
-      cred <- oauth2.0_token(oauth_endpoints("google"), app, scope = scope)
-    }
-    
-    # Stop if unsuccessful
-    set_access_cred(cred)
+    set_oauth2.0_cred()
   }
   
   cred
+}
+
+#' @rdname get_access_cred
+#' @export
+set_oauth2.0_cred <- function(app = bigqr) {
+  cred <- oauth2.0_token(google, app,
+                         scope = c(
+                           "https://www.googleapis.com/auth/cloud-platform",
+                           "https://www.googleapis.com/auth/devstorage.full_control"))
+  
+  set_access_cred(cred)
 }
 
 #' @rdname get_access_cred
@@ -65,4 +50,21 @@ set_access_cred <- function(value) {
 #' @export
 reset_access_cred <- function() {
   set_access_cred(NULL)
+}
+
+#' @export
+#' @rdname get_access_cred
+#' @param service_token A JSON string, URL or file, giving or pointing to
+#'   the service token file.
+set_service_token <- function(service_token) {
+  
+  service_token <- jsonlite::fromJSON(service_token)
+  
+  endpoint <- httr::oauth_endpoints("google")
+  
+  scope <- "https://www.googleapis.com/auth/devstorage.full_control"
+  
+  cred <- httr::oauth_service_token(endpoint, service_token, scope)
+  
+  set_access_cred(cred)
 }

@@ -3,6 +3,8 @@
 export(get_access_cred)
 export(reset_access_cred)
 export(set_access_cred)
+export(set_oauth2.0_cred)
+export(set_service_token)
 export(upload_df_as_csv)
 export(upload_file_to_cs)
 import(assertthat)
