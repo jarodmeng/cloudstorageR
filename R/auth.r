@@ -21,18 +21,18 @@ cs_env <- new.env(parent = emptyenv())
 #' @seealso Cloud Storage OAuth documentation:
 #'  \url{https://cloud.google.com/storage/docs/json_api/v1/how-tos/authorizing}
 get_access_cred <- function() {
-  cred <- bq_env$access_cred
+  cred <- cs_env$access_cred
   if (is.null(cred)) {
     set_oauth2.0_cred()
   }
   
-  cred
+  cs_env$access_cred
 }
 
 #' @rdname get_access_cred
 #' @export
-set_oauth2.0_cred <- function(app = bigqr) {
-  cred <- oauth2.0_token(google, app,
+set_oauth2.0_cred <- function(app = cloudstorageR) {
+  cred <- oauth2.0_token(oauth_endpoints("google"), app,
                          scope = c(
                            "https://www.googleapis.com/auth/cloud-platform",
                            "https://www.googleapis.com/auth/devstorage.full_control"))
@@ -58,13 +58,13 @@ reset_access_cred <- function() {
 #'   the service token file.
 set_service_token <- function(service_token) {
   
-  service_token <- jsonlite::fromJSON(service_token)
+  service_token <- fromJSON(service_token)
   
-  endpoint <- httr::oauth_endpoints("google")
+  endpoint <- oauth_endpoints("google")
   
   scope <- "https://www.googleapis.com/auth/devstorage.full_control"
   
-  cred <- httr::oauth_service_token(endpoint, service_token, scope)
+  cred <- oauth_service_token(endpoint, service_token, scope)
   
   set_access_cred(cred)
 }

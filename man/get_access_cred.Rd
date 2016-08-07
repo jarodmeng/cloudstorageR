@@ -10,7 +10,7 @@
 \usage{
 get_access_cred()
 
-set_oauth2.0_cred(app = bigqr)
+set_oauth2.0_cred(app = cloudstorageR)
 
 set_access_cred(value)
 
