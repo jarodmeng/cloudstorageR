@@ -29,7 +29,7 @@ delete_obj_req <- function(obj, bucket) {
 #' @param bucket bucket name
 #' @param objs list of object names
 #' @param token a valid OAuth2.0 token
-#' @return response
+#' @return response to the batch operation
 #' @export
 #' @rdname delete_obj
 batch_delete_objs <- function(bucket, objs, token = get_access_cred()) {
@@ -50,14 +50,12 @@ batch_delete_objs <- function(bucket, objs, token = get_access_cred()) {
   }
   l_body <- c(l_body, end)
   body <- unlist(l_body)
-  body <- paste(body, collapse = "\n")
   
   url <- paste0(base_host, "/batch")
   
   type <- paste0("multipart/mixed; boundary=", boundary)
   
   resp <- POST(url, body = body, config = config(token = token),
-               encode = "multipart",
                add_headers("Content-Type" = type))
   
   resp

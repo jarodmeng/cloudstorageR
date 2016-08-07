@@ -25,7 +25,7 @@ batch_delete_objs(bucket, objs, token = get_access_cred())
 \value{
 TRUE if the object is successfully deleted; FALSE otherwise
 
-response
+response to the batch operation
 }
 \description{
 Delete an object in a bucket.
